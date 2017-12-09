@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding = utf-8 -*-
+# -*- coding: UTF-8 -*-
 
 """
  @ Creat Time: 2017/12/9
@@ -143,17 +143,22 @@ def getMovieData(movieurl, cookie, userAgent, proxys):
                'Host': 'movie.douban.com',
                'Referer': 'https://movie.douban.com/tag/',
                'User-Agent': random.choice(userAgent)}
-    # moviename = '无'
-    # director = '无'
-    # screenwriter = '无'
-    # actor_name = '无'
-    # leixing = '无'
-    # soup_country = '无'
-    # soup_language = '无'
-    # showtime = '无'
-    # runtime = '无'
-    # people = 0
-    # grade = 0
+    cur = connect.cursor()
+
+    moviename = '无'
+    director = '无'
+    screenwriter = '无'
+    actor_name = '无'
+    summary = '无'
+    leixing = '无'
+    soup_country = '无'
+    soup_language = '无'
+    showtime = '无'
+    runtime = '无'
+    people = 0
+    grade = 0
+    thismovieurl = '无'
+
     try:
         session = requests.Session()
         html = session.get(movieurl, headers=headers, proxies=random.choice(proxys))
@@ -175,12 +180,12 @@ def getMovieData(movieurl, cookie, userAgent, proxys):
         # 获取电影编剧名字
 
         soup_scenarist = list(obj_bs.findAll("span", {"class": "pl"})[1].next_siblings)[1:]
+        screenwriter = ''
         for scenarist in soup_scenarist:
             scenarist_name = scenarist.select("a")
-            screenwriter = ''
             for bianju in scenarist_name:
                 screenwriter = screenwriter + bianju.get_text() + '/'
-            print('编剧：' + screenwriter)
+        print('编剧：' + screenwriter)
 
 
         # 获取主演的名字
@@ -246,13 +251,13 @@ def getMovieData(movieurl, cookie, userAgent, proxys):
         print(thismovieurl)
 
         cur.execute(
-            "insert into love(moviename, director, screenwriter, actor_name, summary, leixing, soup_country,soup_language,showtime,runtime,people,grade,thismovieurl)\
-            values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,)",
-            [moviename, director, screenwriter, actor_name, summary,leixing, soup_country, soup_language, showtime, runtime, people,grade,thismovieurl])
+            "INSERT INTO love(moviename, director, screenwriter, actor_name, summary, leixing, soup_country, soup_language, showtime,runtime, people, grade, thismovieurl)\
+             VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s','%s')"\
+            %(moviename, director, screenwriter, actor_name, summary, leixing, soup_country, soup_language, showtime, runtime, people, grade, thismovieurl)
+            )
         connect.commit()
-
     except:
-        print('+++')
+        print('+++++++++++++++')
     x = x + 1
 
 
@@ -260,16 +265,8 @@ def getMovieData(movieurl, cookie, userAgent, proxys):
 运行函数 
 '''
 start = time.clock()
-x = 0
-connect = pymysql.connect(  # 连接数据库
-    user="root",
-    password="782575191",
-    host="localhost",
-    db="doubanmovie",
-    port=3306,
-    charset=("utf8"),  # 注意编码一定要设置，否则gbk你懂的
-    use_unicode=True,
-)
+x = 1
+connect = pymysql.connect("localhost", "root", "782575191", "doubanmovie", charset="utf8")
 cur = connect.cursor()
 for pakgeurl in getMoviePakge():
     for movieurl in getMovieUrls(pakgeurl, getCookie(), getUA(), proxypool(150)):
@@ -278,4 +275,4 @@ for pakgeurl in getMoviePakge():
 cur.close()
 connect.close()
 end = time.clock()
-print('获取 {} 个电影数据花费了 {:.2f} s'.format(x,(end - start)))
+print('获取到 {} 个电影的数据，共用时 {:.2f} s'.format(x,(end - start)))
