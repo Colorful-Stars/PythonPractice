@@ -151,8 +151,8 @@ def getMovieData(movieurl, cookie, userAgent, proxys):
     actor_name = '无'
     summary = '无'
     leixing = '无'
-    soup_country = '无'
-    soup_language = '无'
+    country = '无'
+    language = '无'
     showtime = '无'
     runtime = '无'
     people = 0
@@ -213,13 +213,13 @@ def getMovieData(movieurl, cookie, userAgent, proxys):
         # 获取电影的制片国家
         # 这个比较有难度
 
-        soup_country = list(obj_bs.findAll("span", {"class": "pl"})[4].next_siblings)[0]
-        print('制片国家：' + soup_country)
+        country = list(obj_bs.findAll("span", {"class": "pl"})[4].next_siblings)[0]
+        print('制片国家：' + country)
 
         # 语言
 
-        soup_language = list(obj_bs.findAll("span", {"class": "pl"})[5].next_siblings)[0]
-        print('语言：' + soup_language)
+        language = list(obj_bs.findAll("span", {"class": "pl"})[5].next_siblings)[0]
+        print('语言：' + language)
 
         # 上映日期
 
@@ -251,9 +251,9 @@ def getMovieData(movieurl, cookie, userAgent, proxys):
         print(thismovieurl)
 
         cur.execute(
-            "INSERT INTO love(moviename, director, screenwriter, actor_name, summary, leixing, soup_country, soup_language, showtime,runtime, people, grade, thismovieurl)\
+            "INSERT INTO love(moviename, director, screenwriter, actor_name, summary, leixing, country, language, showtime,runtime, people, grade, thismovieurl)\
              VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s','%s')"\
-            %(moviename, director, screenwriter, actor_name, summary, leixing, soup_country, soup_language, showtime, runtime, people, grade, thismovieurl)
+            %(moviename, director, screenwriter, actor_name, summary, leixing, country, language, showtime, runtime, people, grade, thismovieurl)
             )
         connect.commit()
     except:
