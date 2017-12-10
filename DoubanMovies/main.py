@@ -242,12 +242,12 @@ def getMovieData(movieurl, cookie, userAgent, proxys):
         thismovieurl = movieurl
         print(thismovieurl)
 
-        # cur.execute(
-        #     "INSERT INTO love(moviename, director, screenwriter, actor_name, summary, leixing, country, language, showtime,runtime, people, grade, thismovieurl)\
-        #      VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s','%s')"\
-        #     %(moviename, director, screenwriter, actor_name, summary, leixing, country, language, showtime, runtime, people, grade, thismovieurl)
-        #     )
-        # connect.commit()
+        cur.execute(
+            "INSERT INTO love(moviename, director, screenwriter, actor_name, summary, leixing, country, language, showtime,runtime, people, grade, thismovieurl)\
+             VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s','%s')"\
+            %(moviename, director, screenwriter, actor_name, summary, leixing, country, language, showtime, runtime, people, grade, thismovieurl)
+            )
+        connect.commit()
     except:
         print('************此条爬取有问题************')
     x = x + 1
@@ -258,13 +258,13 @@ def getMovieData(movieurl, cookie, userAgent, proxys):
 '''
 start = time.clock()
 x = 1
-# connect = pymysql.connect("localhost", "root", "782575191", "doubanmovie", charset="utf8")
-# cur = connect.cursor()
+connect = pymysql.connect("localhost", "root", "782575191", "doubanmovie", charset="utf8")
+cur = connect.cursor()
 for pakgeurl in getMoviePakge():
     for movieurl in getMovieUrls(pakgeurl, getHeaders.getCookie(), getHeaders.getUserAgent(), getHeaders.proxypool(150)):
         getMovieData(movieurl, getHeaders.getCookie(), getHeaders.getUserAgent(), getHeaders.proxypool(150))
         print('《=========================*********==============================》')
-# cur.close()
-# connect.close()
+cur.close()
+connect.close()
 end = time.clock()
 print('获取到 {} 个电影的数据，共用时 {:.2f} s'.format(x,(end - start)))
