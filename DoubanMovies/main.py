@@ -65,8 +65,11 @@ def proxypool(num):
     ips = fp.readlines()
     while n < num:
         for p in ips:
-            ip = p.strip('\n').split('\t')
-            proxy = 'https://' + ip[0] + ':' + ip[1]
+            # for host.txt
+            # ip = p.strip('\n').split('\t')
+            # proxy = 'https://' + ip[0] + ':' + ip[1]
+            # for host2.txt
+            proxy = 'http://' + p
             proxies = {'http': proxy}
             # print(proxies)
             proxys.append(proxies)
@@ -95,7 +98,7 @@ getMovieUrls()
 '''
 def getMovieUrls(pakgeurl, cookie, userAgent, proxys):
     movie_urls = []
-    time.sleep(random.uniform(1.6, 2.1))
+    time.sleep(random.uniform(3.7, 6.2))
     headers = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
                'Accept-Encoding': 'gzip, deflate',
                'Accept-Language': 'zh-CN',
@@ -124,7 +127,7 @@ def getMovieUrls(pakgeurl, cookie, userAgent, proxys):
 
 def getMovieData(movieurl, cookie, userAgent, proxys):
     global x
-    time.sleep(random.uniform(1.6, 2.1))
+    time.sleep(random.uniform(2.5, 5.4))
     headers = {'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
                'Accept-Encoding': 'gzip, deflate',
                'Accept-Language': 'zh-CN',
@@ -249,7 +252,9 @@ def getMovieData(movieurl, cookie, userAgent, proxys):
             )
         connect.commit()
     except:
-        print('************此条爬取有问题************')
+        print('               ******                 '+'\n'+\
+             '************此条爬取有问题************'+'\n'+\
+             '               ******                 ')
     x = x + 1
 
 
@@ -261,9 +266,11 @@ x = 1
 connect = pymysql.connect("localhost", "root", "782575191", "doubanmovie", charset="utf8")
 cur = connect.cursor()
 for pakgeurl in getMoviePakge():
-    for movieurl in getMovieUrls(pakgeurl, getCookie(), getUA(), proxypool(150)):
-        getMovieData(movieurl, getCookie(), getUA(), proxypool(150))
+    for movieurl in getMovieUrls(pakgeurl, getCookie(), getUA(), proxypool(2000)):
+        getMovieData(movieurl, getCookie(), getUA(), proxypool(2000))
+        end0 = time.clock()
         print('《=========================*********==============================》')
+        print('已获取到 {} 个电影的数据，已用时 {:.2f} s'.format(x-1,(end0 - start)))
 cur.close()
 connect.close()
 end = time.clock()
