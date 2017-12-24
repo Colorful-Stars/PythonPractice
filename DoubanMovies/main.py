@@ -2,8 +2,8 @@
 # -*- coding: UTF-8 -*-
 
 """
- @ Creat Time: 2017/12/9
- @ Auther: songpo.zhang
+ @ Create Time: 2017/12/9
+ @ Author: songpo.zhang
  @ Target:
 """
 
@@ -251,6 +251,7 @@ def getMovieData(movieurl, cookie, userAgent, proxys):
             %(moviename, director, screenwriter, actor_name, summary, leixing, country, language, showtime, runtime, people, grade, thismovieurl)
             )
         connect.commit()
+        print('已获取到 {} 个电影的数据，已用时 {:.2f} s'.format(x-1,(end0 - start)))
     except:
         print('               ******                 '+'\n'+\
              '************此条爬取有问题************'+'\n'+\
@@ -270,7 +271,6 @@ for pakgeurl in getMoviePakge():
         getMovieData(movieurl, getCookie(), getUA(), proxypool(2000))
         end0 = time.clock()
         print('《=========================*********==============================》')
-        print('已获取到 {} 个电影的数据，已用时 {:.2f} s'.format(x-1,(end0 - start)))
 cur.close()
 connect.close()
 end = time.clock()
