@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://F:/Python/Basic_Algorithm_and_Offer/.idea/Basic_Algorithm_and_Offer.iml" filepath="F:/Python/Basic_Algorithm_and_Offer/.idea/Basic_Algorithm_and_Offer.iml" />
       <module fileurl="file://F:\Python\Datasets\.idea\Datasets.iml" filepath="F:\Python\Datasets\.idea\Datasets.iml" />
       <module fileurl="file://F:/Python/Kaggle/.idea/Kaggle.iml" filepath="F:/Python/Kaggle/.idea/Kaggle.iml" />
       <module fileurl="file://F:/Python/ML in Action/.idea/ML in Action.iml" filepath="F:/Python/ML in Action/.idea/ML in Action.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/Practice.iml" filepath="$PROJECT_DIR$/.idea/Practice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../.idea/PycharmProjects.iml" filepath="$PROJECT_DIR$/../.idea/PycharmProjects.iml" />
     </modules>
   </component>
 </project>

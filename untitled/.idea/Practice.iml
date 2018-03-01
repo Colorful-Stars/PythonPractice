@@ -7,6 +7,8 @@
     <orderEntry type="module" module-name="Datasets" />
     <orderEntry type="module" module-name="Kaggle" />
     <orderEntry type="module" module-name="ML in Action" />
+    <orderEntry type="module" module-name="PycharmProjects" />
+    <orderEntry type="module" module-name="Basic_Algorithm_and_Offer" />
   </component>
   <component name="TestRunnerService">
     <option name="PROJECT_TEST_RUNNER" value="Unittests" />
