@@ -26,7 +26,7 @@ print(a)
 # print(type(rawdata_r))
 # print(rawdata_r)
 
-plt.plot(a)
+plt.plot(a,color="green")
 # plt.plot(rawdata_r)
 # print(len(a))
 # print(a1)
@@ -40,9 +40,9 @@ print(len(b))
 plt.plot(b)
 # plt.show()
 #
-# b1 = scio.loadmat("LED_R_tmp.mat")
-# led_r_tmp = b1['LED_R_tmp'][1:]
-# print(led_r_tmp)
+b1 = scio.loadmat("LED_R_tmp.mat")
+led_r_tmp = b1['LED_R_tmp'][1:]
+print(led_r_tmp)
 # print(len(led_r_tmp))
 # plt.plot(led_r_tmp)
 

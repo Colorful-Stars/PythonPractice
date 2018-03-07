@@ -40,7 +40,8 @@
 
 # print(numerator[2:])
 
-# for i in range(0,5):
-#     print(i)
-import numpy as np
-print(np.ones(6))
+for i in range(4,-1,-1):
+    print(i)
+
+# import numpy as np
+# print(np.ones(6))
