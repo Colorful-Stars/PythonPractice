@@ -6,7 +6,7 @@
  @ Author: songpo.zhang
  @ Target:
 """
-import numpy as np
+# import numpy as np
 # a = np.ones(5)
 # print(type(a))
 # b = list(a)
@@ -24,18 +24,23 @@ import numpy as np
 
 # a = [1,2,3,4,5]
 # print(sum(a))
-numerator = [
-                 0.773838953566480,
-                 - 3.86919476783240,
-                 7.73838953566480,
-                 - 7.73838953566480,
-                 3.86919476783240,
-                 - 0.773838953566480
-                 ]
+# numerator = [
+#                  0.773838953566480,
+#                  - 3.86919476783240,
+#                  7.73838953566480,
+#                  - 7.73838953566480,
+#                  3.86919476783240,
+#                  - 0.773838953566480
+#                  ]
 
 # iir_cx = np.ones(6)
 # print(iir_cx[2])
 # a = numerator * iir_cx
 # print(a)
 
-print(numerator[2:])
+# print(numerator[2:])
+
+# for i in range(0,5):
+#     print(i)
+import numpy as np
+print(np.ones(6))
