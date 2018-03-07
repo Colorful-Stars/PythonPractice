@@ -37,14 +37,14 @@ def iirFilter(rawData):
     iir_cy = np.ones(L)
     iirData = np.zeros(Ls)
 
-    for ii in range(1,Ls):
-        for jj in range(L- 2, 0, -1):
+    for ii in range(Ls):
+        for jj in range(L - 2, -1, -1):
             iir_cx[jj + 1] = iir_cx[jj]
             iir_cy[jj + 1] = iir_cy[jj]
 
-        iir_cx[1] = rawData[ii]
-        iir_cy[1] = sum(numerator * iir_cx) - sum(denominator[2:]*iir_cy[2:])
-        iir_cy[1] = iir_cy[1] / denominator[1]
-        iirData[ii] = iir_cy[1]
+        iir_cx[0] = rawData[ii]
+        iir_cy[0] = sum(numerator * iir_cx) - sum(denominator[1:]*iir_cy[1:])
+        iir_cy[0] = iir_cy[0] / denominator[0]
+        iirData[ii] = iir_cy[0]
 
     return iirData
