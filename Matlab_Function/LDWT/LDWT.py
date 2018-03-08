@@ -26,8 +26,13 @@ def LDWT(input, DecLevel, WaveRemain, Fs, Flag):
         N = int(N / 2) # 取整
 
         for ii in range(N):
-            S[ii] = Si[2 * (ii - 1) + 1]
-            S[ii + N] = Si(2 * ii)
+            """
+            matlab中下标从1开始，python中是从0开始
+            S(ii)=Si(2*(ii-1)+1);
+            S(ii+N)=Si(2*ii);
+            """
+            S[ii] = Si[2 * ii]
+            S[ii + N] = Si[2 * ii + 1]
 
         for ii in range(N):
             if ii == N:
