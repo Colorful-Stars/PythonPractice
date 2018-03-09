@@ -107,4 +107,4 @@ def LDWT(input, DecLevel, WaveRemain, Fs, Flag):
 
         N = N * 2
 
-    return
+    return Si
