@@ -9,9 +9,9 @@
 
 import numpy as np
 
-def LDWT(input, DecLevel, WaveRemain, Fs, Flag):
-    Si = input
-    N = len(input)
+def LDWT(inputs, DecLevel, WaveRemain, Fs, Flag):
+    Si = inputs
+    N = len(inputs)
 
     a = -1.586134342
     b = -0.052980118
@@ -35,7 +35,7 @@ def LDWT(input, DecLevel, WaveRemain, Fs, Flag):
             S[ii + N] = Si[2 * ii + 1]
 
         for ii in range(N):
-            if ii == N:
+            if ii == (N - 1):
                 S[ii + N] = S[ii + N] + a * (S[ii] + S[ii] + S[ii] - S[ii - 1])
             else:
                 S[ii + N] = S[ii + N] + a * (S[ii] + S[ii + 1])
@@ -47,7 +47,7 @@ def LDWT(input, DecLevel, WaveRemain, Fs, Flag):
                 S[ii] = S[ii] + b * (S[ii + N] + S[ii - 1 + N])
 
         for ii in range(N):
-            if ii == N:
+            if ii == (N - 1):
                 S[ii + N] = S[ii + N] + c * (S[ii] + S[ii] + S[ii] - S[ii - 1])
             else:
                 S[ii + N] = S[ii + N] + c * (S[ii] + S[ii + 1])
@@ -64,7 +64,7 @@ def LDWT(input, DecLevel, WaveRemain, Fs, Flag):
             Si[ii] = S[ii]
 
         if (jj != WaveRemain):
-            S[N:] = np.zeros(N)
+            S[N : 2*N] = np.zeros(N)
 
         if Flag == 0:
             if jj == DecLevel:
@@ -84,7 +84,7 @@ def LDWT(input, DecLevel, WaveRemain, Fs, Flag):
                 S[ii] = S[ii] - d * (S[ii + N] + S[ii - 1 + N])
 
         for ii in range(N):
-            if ii == N:
+            if ii == (N - 1):
                 S[ii + N] = S[ii + N] - c * (S[ii] + S[ii] + S[ii] - S[ii - 1])
             else:
                 S[ii + N] = S[ii + N] - c * (S[ii] + S[ii + 1])
@@ -96,10 +96,10 @@ def LDWT(input, DecLevel, WaveRemain, Fs, Flag):
                 S[ii] = S[ii] - b * (S[ii + N] + S[ii - 1 + N])
 
         for ii in range(N):
-            if ii == N:
-                S[ii + N] = S[ii + N] + a * (S[ii] + S[ii] + S[ii] - S[ii - 1])
+            if ii == (N - 1):
+                S[ii + N] = S[ii + N] - a * (S[ii] + S[ii] + S[ii] - S[ii - 1])
             else:
-                S[ii + N] = S[ii + N] + a * (S[ii] + S[ii + 1])
+                S[ii + N] = S[ii + N] - a * (S[ii] + S[ii + 1])
 
         for ii in range(N):
             Si[2 * ii] = S[ii]
