@@ -23,13 +23,16 @@ a1=[]
 for ii in range(len(a0)):
     a1.append(a0[ii][0])
 print(a1)
+print(len(a1))
 print("=================================================================")
 b = LDWT(a1,6,6,25,1)
+print("LDWT with Python:")
 print(b)
 print("=================================================================")
 b0 = scio.loadmat("LED_G_win_DC.mat")['LED_G_win_DC']
 b1=[]
 for ii in range(len(b0)):
     b1.append(b0[ii][0])
+print("LDWT with Matlab:")
 print(b1)
 print("=================================================================")

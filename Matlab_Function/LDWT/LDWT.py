@@ -10,6 +10,7 @@
 import numpy as np
 
 def LDWT(inputs, DecLevel, WaveRemain, Fs, Flag):
+
     Si = inputs
     N = len(inputs)
 
@@ -60,14 +61,14 @@ def LDWT(inputs, DecLevel, WaveRemain, Fs, Flag):
 
         for ii in range(N):
             S[ii + N] = S[ii + N] / e
-            S[ii] = S[ii] / e
+            S[ii] = S[ii] * e
             Si[ii] = S[ii]
 
-        if (jj != WaveRemain):
+        if (jj != (WaveRemain-1)):
             S[N : 2*N] = np.zeros(N)
 
         if Flag == 0:
-            if jj == DecLevel:
+            if jj == (DecLevel - 1):
                 Si[:N] = np.zeros(N)
 
     for jj in range(DecLevel):
@@ -75,7 +76,7 @@ def LDWT(inputs, DecLevel, WaveRemain, Fs, Flag):
         for ii in range(N):
             S[ii] = Si[ii]
             S[ii] = S[ii] / e
-            S[ii + N] = S[ii + N] / e
+            S[ii + N] = S[ii + N] * e
 
         for ii in range(N):
             if ii == 0:
