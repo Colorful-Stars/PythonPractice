@@ -12,21 +12,23 @@ import matplotlib.pyplot as plt
 import scipy.io as scio
 
 
-f = open("1200-rawdata.txt", "r")
+# f = open("1200-rawdata.txt", "r")
+# #
+# a=[]
+# for line in f.readlines():
+#     line = line.strip("\n")
+#     a.append(line)
+# # f.close()
+# print(a)
 
-a=[]
-for line in f.readlines():
-    line = line.strip("\n")
-    a.append(line)
-f.close()
-print(a)
+a0 = scio.loadmat("RawLED_R.mat")['RawLED_R']
+a1=[]
+for ii in range(len(a0)):
+    a1.append(a0[ii][0])
 
-# a1 = scio.loadmat("RawLED_R.mat")
-# rawdata_r = a1['RawLED_R'][1:]
-# print(type(rawdata_r))
-# print(rawdata_r)
+print(a1)
 
-plt.plot(a,color="green")
+# plt.plot(a,color="green")
 # plt.plot(rawdata_r)
 # print(len(a))
 # print(a1)
@@ -34,19 +36,23 @@ plt.plot(a,color="green")
 # print(len(a1))
 
 from iirFilter import iirFilter
-b = iirFilter(a)
+b = iirFilter(a1)
+print("IIR_Filter with Python:")
 print(b)
-print(len(b))
-plt.plot(b)
+
+# plt.plot(b)
 # plt.show()
 #
-b1 = scio.loadmat("LED_R_tmp.mat")
-led_r_tmp = b1['LED_R_tmp'][1:]
-print(led_r_tmp)
+b0 = scio.loadmat("LED_R_tmp.mat")['LED_R_tmp']
+b1=[]
+for ii in range(len(b0)):
+    b1.append(b0[ii][0])
+print("IIR_Filter with Matlab:")
+print(b1)
 # print(len(led_r_tmp))
 # plt.plot(led_r_tmp)
 
 
-plt.show()
+# plt.show()
 
 
